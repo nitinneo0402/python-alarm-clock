@@ -1,0 +1,37 @@
+
+
+# this is a alarm clock in python - u can set the alarm using sliders and then the alarm will ring using the file in playsound. to make this work u need to change the playsound file to a file u want to play sound from
+import ipywidgets as widgets
+import datetime
+from IPython.display import display
+
+#print ("Current time is: " + (datetime.datetime.today().strftime('%H'))+ " hrs :" + (datetime.datetime.today().strftime("%M")) + " mins: " + (datetime.datetime.today().strftime("%S")) + " secs")
+print ("\nPl setup your alarm by moving the slider")
+
+ #intSlider widget here
+h = widgets.IntSlider(10,0,24,1, description="hour")
+display (h)
+m = widgets.IntSlider(30,0,60,1, description="minutes")
+display (m)
+#s = widgets.IntSlider(30,0,60,1, description="seconds")
+#display (s)
+output = widgets.Output()
+
+button = widgets.Button(description="Set Alarm")
+display (button, output)
+
+
+def my_alarm(button):
+    
+    alarm_time = h.value + m.value
+    print (f"the alarm will ring at {h.value} hrs {m.value} minutes.")
+    
+    while True:
+        if  h.value == int((datetime.datetime.today().strftime('%H'))) and  m.value == int((datetime.datetime.today().strftime('%M'))) :
+            from playsound import playsound
+            playsound('/Users/nitin/Desktop/python/program_assets/AD-FinalCountdown_pt2.mp3')
+            playsound('/Users/nitin/Desktop/python/program_assets/AD-FinalCountdown_pt2.mp3')
+        
+            break
+
+button.on_click(my_alarm)
